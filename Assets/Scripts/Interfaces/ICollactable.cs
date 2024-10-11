@@ -1,0 +1,7 @@
+interface ICollactable
+{
+    void  Collect ();
+   
+
+
+}

@@ -1,0 +1,5 @@
+interface ICinteractor 
+{
+    void interact ();
+
+}
