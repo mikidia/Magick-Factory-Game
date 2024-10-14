@@ -16,7 +16,7 @@ public class PlayerCharacter : MonoBehaviour
 
     [Header("My References")]
     private Rigidbody _rigidBody;
-    private BaseGun _equippedGun;
+
 
     #endregion
 
@@ -24,7 +24,7 @@ public class PlayerCharacter : MonoBehaviour
 
     private void Awake()
     {
-        _equippedGun = GetComponentInChildren<BaseGun>();
+
         _rigidBody = GetComponent<Rigidbody>();
     }
 
@@ -36,19 +36,12 @@ public class PlayerCharacter : MonoBehaviour
 
     #endregion
 
-    private void OnTriggerEnter (Collider other)
-    {
-        ICollactable collectable = other.GetComponent<ICollactable>();
-        if (collectable != null)
-        {
-            collectable.Collect();
-        }
-    }
+
     private void PlayerInput()
     {
         if(Input.GetKey(KeyCode.Mouse0))
         {
-            FireGun();
+
         }
         if(Input.GetKeyDown(KeyCode.E))
         {
@@ -63,11 +56,6 @@ public class PlayerCharacter : MonoBehaviour
     private void Interact()
     {
 
-    }
-
-    private void FireGun()
-    {
-        _equippedGun?.Fire();
     }
 
     private void Jump()

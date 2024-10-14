@@ -1,5 +1,0 @@
-interface ICinteractor 
-{
-    void interact ();
-
-}
