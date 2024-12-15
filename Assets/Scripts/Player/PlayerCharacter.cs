@@ -2,29 +2,49 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 
 #endregion
 
-public class PlayerCharacter : MonoBehaviour
+public class PlayerCharacter : MonoBehaviour, IDamageable
 {
     #region Declarations
 
     [Header("Movement Settings")]
-    [SerializeField] private float _movementSpeed;
-    [SerializeField] private float _jumpForce;
+    [SerializeField]
+    private float _movementSpeed;
+    private bool isMovementDisabled = false;
+
+    [SerializeField]
+    private float _jumpForce;
+
+    [SerializeField]
+    private float _playerHp;
 
     [Header("My References")]
     private Rigidbody _rigidBody;
-
 
     #endregion
 
     #region MonoBehaviour
 
+
+
+
+    public void DisableMovement(float duration)
+    {
+        isMovementDisabled = true;
+        Invoke(nameof(EnableMovement), duration);
+    }
+
+    private void EnableMovement()
+    {
+        isMovementDisabled = false;
+    }
+
     private void Awake()
     {
-
         _rigidBody = GetComponent<Rigidbody>();
     }
 
@@ -32,6 +52,16 @@ public class PlayerCharacter : MonoBehaviour
     {
         PlayerInput();
         MoveInDirection(new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")));
+
+        if (isMovementDisabled)
+            return;
+
+        // Example movement logic
+        float horizontal = Input.GetAxis("Horizontal");
+        float vertical = Input.GetAxis("Vertical");
+
+        Vector3 direction = new Vector3(horizontal, 0, vertical).normalized;
+        transform.Translate(direction * 5f * Time.deltaTime, Space.World);
     }
 
     #endregion
@@ -39,24 +69,18 @@ public class PlayerCharacter : MonoBehaviour
 
     private void PlayerInput()
     {
-        if(Input.GetKey(KeyCode.Mouse0))
-        {
-
-        }
-        if(Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKey(KeyCode.Mouse0)) { }
+        if (Input.GetKeyDown(KeyCode.E))
         {
             Interact();
         }
-        if(Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             Jump();
         }
     }
 
-    private void Interact()
-    {
-
-    }
+    private void Interact() { }
 
     private void Jump()
     {
@@ -66,15 +90,22 @@ public class PlayerCharacter : MonoBehaviour
 
     private void MoveInDirection(Vector2 direction)
     {
-        Vector3 finalVelocity = (direction.x * transform.right + direction.y * transform.forward).normalized * _movementSpeed;
+        Vector3 finalVelocity =
+            (direction.x * transform.right + direction.y * transform.forward).normalized
+            * _movementSpeed;
 
         finalVelocity.y = _rigidBody.velocity.y;
         _rigidBody.velocity = finalVelocity;
     }
 
-    protected void TakeDamage(int damage)
-    {
+    protected void TakeDamage(int damage) { }
 
+    public void TakeDamage(float damage)
+    {
+        _playerHp -= damage;
+
+        print(_playerHp);
     }
-    
+
+    public void attack(float damage) { }
 }

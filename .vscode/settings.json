@@ -51,5 +51,6 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "Magick-Factory-Game.sln"
+    "dotnet.defaultSolution": "Magick-Factory-Game.sln",
+    "editor.fontSize": 17
 }

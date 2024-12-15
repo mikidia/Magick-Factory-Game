@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f32442cb8a3672644975f43029911379, type: 3}
+  m_Name: New Whirlwind Spell
+  m_EditorClassIdentifier: 
+  spellName: test
+  cooldown: 5
+  cooldownTimer: 1.8197994
+  whirlwindPrefab: {fileID: 1332374630323531861, guid: c3174a4798a71b94cb20238a128dea49, type: 3}
+  liftHeight: 10
+  duration: 10
